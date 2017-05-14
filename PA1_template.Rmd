@@ -1,8 +1,9 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output:
-html_document:
-keep_md: TRUE
+output: 
+  html_document:
+    dev: 'png'
+    keep_md: TRUE
 ---
 
 ## Introduction 
@@ -77,6 +78,7 @@ perday <- tapply(data$steps, data$time, mean, na.rm=TRUE)
 highest <- data$time[1:288][perday==max(perday)]
 plot(as.POSIXct(data$datetime, format = "%H:%M")[1:288] , perday, type = "l", main = "Time Series of Average Steps Taken per Interval", ylab= "Average steps per 5 minutes", xlab = "Time of the Day", xaxs='r')
 points(as.POSIXct(data$datetime, format = "%H:%M")[1:288][perday==max(perday)], max(perday), pch=19, col="red")
+text(as.POSIXct(data$datetime, format = "%H:%M")[105], 206, "Max @ (8:35, 206.17)", pos =4, cex=0.8)
 ```
 
 From the time series we can see that the **interval** with the highest number of **steps** begins at `r highest` with a value of `r sprintf("%3.2f", max(perday))` steps.
